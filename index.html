@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>リボ払い・分割払い 実質利息計算ツール | 完済までの総額が分かる</title>
+<meta name="description" content="リボ払い・分割払いの残高、毎月の返済額、実質年率を入れるだけで、完済までにかかる期間と支払う利息の総額を自動計算。一括で払った場合との差額もひと目で分かる無料ツールです。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webtools-labs.com/revolving-risoku-keisan/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370765779014113" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKK5TXCQEK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NKK5TXCQEK');
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f766e'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='sans-serif'%3E%EF%BF%A5%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="リボ払い・分割払い 実質利息計算ツール | 完済までの総額が分かる">
+<meta property="og:description" content="残高・毎月の返済額・実質年率を入れるだけで、完済までの期間と支払う利息の総額が分かります。">
+<meta property="og:url" content="https://webtools-labs.com/revolving-risoku-keisan/">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="リボ払い・分割払い 実質利息計算ツール">
+<meta name="twitter:description" content="リボ払いの完済までの期間と利息総額を自動計算する無料ツール。">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "リボ払い・分割払い 実質利息計算ツール",
+  "url": "https://webtools-labs.com/revolving-risoku-keisan/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "description": "リボ払い・分割払いの残高、毎月の返済額、実質年率から、完済までの期間と支払う利息の総額を自動計算できる無料ツール。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "inLanguage": "ja"
+}
+</script>
+<style>
+:root {
+  --bg: #ffffff;
+  --surface-2: #f7f7f7;
+  --ink: #1a1a1a;
+  --muted: #767676;
+  --line: #e3e3e3;
+  --accent: #0f766e;
+  --best-bg: #f0f8f6;
+  --warn-bg: #fff7ed;
+  --warn-ink: #9a5b00;
+  --danger: #b91c1c;
+  --danger-bg: #fdecec;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+header.masthead { margin-bottom: 1.5rem; }
+h1 {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.7rem);
+  margin: 0 0 0.7rem;
+  letter-spacing: 0.01em;
+}
+p.lede { color: var(--muted); margin: 0; max-width: 60ch; font-size: 0.95rem; }
+.updated-note { display: block; margin-top: 0.9rem; font-size: 0.78rem; color: var(--muted); }
+
+.notice-box {
+  background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px;
+  padding: 0.9rem 1.1rem; font-size: 0.85rem; margin-bottom: 2rem;
+}
+.danger-box {
+  background: var(--danger-bg); color: var(--danger); border-radius: 8px;
+  padding: 0.9rem 1.1rem; font-size: 0.85rem; margin-bottom: 1.5rem; font-weight: 700;
+}
+
+section { margin-bottom: 2.5rem; }
+h2 { font-size: 1.05rem; font-weight: 700; margin: 0 0 1rem; }
+
+.field-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.field { flex: 1; min-width: 160px; }
+.field label { display: block; font-size: 0.83rem; color: var(--muted); margin-bottom: 0.35rem; }
+.field input[type="number"] {
+  width: 100%; font-variant-numeric: tabular-nums; font-size: 1.05rem;
+  padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--ink);
+}
+.field input:focus { outline: none; border-color: var(--accent); }
+.field-hint { font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; }
+
+.summary-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card {
+  flex: 1; min-width: 160px; background: var(--best-bg); border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.summary-card.warn { background: var(--danger-bg); }
+.summary-card .label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; }
+.summary-card .value { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.summary-card.warn .value { color: var(--danger); }
+.summary-card .sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+table.compare { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.compare th, table.compare td {
+  padding: 0.55rem 0.5rem; text-align: right; border-bottom: 1px solid var(--line); vertical-align: top;
+}
+table.compare th:first-child, table.compare td:first-child { text-align: left; }
+table.compare thead th { color: var(--muted); font-weight: 500; font-size: 0.78rem; }
+table.compare td.num { font-variant-numeric: tabular-nums; }
+
+.ref-table { overflow-x: auto; }
+.ref-table table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 460px; }
+.ref-table th, .ref-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--line); text-align: left; }
+.ref-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
+
+.disclaimer { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; }
+
+.ad-slot { margin: 2.5rem 0; text-align: center; min-height: 100px; }
+
+.contact-box textarea {
+  width: 100%; min-height: 6rem; font-family: inherit; font-size: 0.92rem;
+  padding: 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  resize: vertical; margin-bottom: 0.6rem;
+}
+.contact-box input[type="email"] {
+  width: 100%; font-family: inherit; font-size: 0.92rem;
+  padding: 0.6rem 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+.contact-box textarea:focus, .contact-box input:focus { outline: none; border-color: var(--accent); }
+.contact-box button {
+  font-family: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem;
+  border: none; border-radius: 6px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.contact-box button:disabled { opacity: 0.5; cursor: not-allowed; }
+.contact-status { font-size: 0.85rem; margin-top: 0.6rem; }
+.contact-status.ok { color: var(--accent); }
+.contact-status.err { color: #b91c1c; }
+
+footer.site-footer {
+  margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+  font-size: 0.78rem; color: var(--muted);
+}
+footer.site-footer p { margin: 0 0 0.5rem; }
+footer.site-footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <h1>リボ払い・分割払い 実質利息計算ツール</h1>
+    <p class="lede">残高・毎月の返済額・実質年率を入れるだけで、完済までにかかる期間と、支払うことになる利息の総額をまとめて計算します。</p>
+    <span class="updated-note">計算方式 最終確認日: 2026年9月1日</span>
+  </header>
+
+  <div class="notice-box">
+    ⚠️ 主要カード会社のリボ払いの実質年率は15.0%前後が一般的です（会社・利用枠により異なります）。毎月の支払額が一定に見えても、利息を優先的に引かれてから元金が減るため、思っているより完済が遠いケースが多くあります。
+  </div>
+
+  <section>
+    <h2>完済までの利息を計算</h2>
+    <div class="field-row">
+      <div class="field">
+        <label for="balance">現在の残高（円）</label>
+        <input type="number" id="balance" min="0" step="1000" value="150000">
+      </div>
+      <div class="field">
+        <label for="monthly">毎月の返済額（円）</label>
+        <input type="number" id="monthly" min="0" step="500" value="10000">
+      </div>
+      <div class="field">
+        <label for="rate">実質年率（%）</label>
+        <input type="number" id="rate" min="0" step="0.1" value="15.0">
+        <p class="field-hint">利用明細・会員サイトに記載の「実質年率」を入力</p>
+      </div>
+    </div>
+
+    <div id="dangerArea"></div>
+
+    <div class="summary-cards" id="summaryCards"></div>
+
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead>
+          <tr><th>完済目安</th><th class="num">支払回数</th><th class="num">支払総額</th><th class="num">うち利息</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+    <p class="disclaimer">毎月、残高に対して実質年率÷12の利息が発生し、返済額から利息を差し引いた分だけ元金が減っていく「元利定額方式」を想定した概算です。実際の返済スケジュールはカード会社の計算方式（残高スライド方式など）や締め日・追加利用の有無により異なります。正確な金額は各カード会社の会員サイト・利用明細でご確認ください。</p>
+  </section>
+
+  <section>
+    <h2>実質年率の目安</h2>
+    <div class="ref-table">
+      <table>
+        <thead><tr><th>支払い方法</th><th>実質年率の目安</th></tr></thead>
+        <tbody>
+          <tr><td>リボ払い</td><td>年15.0%前後（多くのカード会社で共通）</td></tr>
+          <tr><td>分割払い（3回以上）</td><td>年12.0〜15.0%程度</td></tr>
+          <tr><td>キャッシング（カードローン）</td><td>年15.0〜18.0%程度</td></tr>
+          <tr><td>一括払い・2回払い</td><td>0%（手数料なしが一般的）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">実質年率はカード会社・契約条件により異なります。必ずご自身の利用明細・契約内容の実質年率を入力してください。</p>
+  </section>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-2370765779014113"
+      data-ad-slot="3021985784"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <section class="contact-box">
+    <h2>ご意見・追加してほしい機能</h2>
+    <p class="lede" style="margin-bottom:0.9rem;">気づいたことや、あったら便利な機能があれば教えてください。</p>
+    <form id="contactForm">
+      <input type="email" id="contactEmail" placeholder="返信が必要な場合はメールアドレス（任意）">
+      <textarea id="contactMessage" placeholder="ご意見・ご要望をどうぞ" required></textarea>
+      <button type="submit" id="contactSubmit">送信する</button>
+      <p class="contact-status" id="contactStatus"></p>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <p>本ツールの計算結果は一般的な返済方式にもとづく概算であり、正確性を保証するものではありません。実際の返済額・完済時期は必ずご利用のカード会社の会員サイト・利用明細でご確認ください。</p>
+    <p>あわせて使える：
+      <a href="https://webtools-labs.com/furima-hikaku-keisan/">フリマ手数料計算・比較ツール</a> ／
+      <a href="https://webtools-labs.com/furima-tedori-simulator/">フリマ手取りシミュレーター</a> ／
+      <a href="https://webtools-labs.com/yukyu-hiyou-keisan/">有給休暇 付与日数計算ツール</a>
+    </p>
+    <p>当サイトは広告を掲載する場合があります。</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var balanceInput = document.getElementById('balance');
+  var monthlyInput = document.getElementById('monthly');
+  var rateInput = document.getElementById('rate');
+  var resultBody = document.getElementById('resultBody');
+  var summaryCards = document.getElementById('summaryCards');
+  var dangerArea = document.getElementById('dangerArea');
+
+  function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
+
+  function simulate(balance, monthly, annualRate) {
+    var monthlyRate = annualRate / 100 / 12;
+    var remaining = balance;
+    var totalInterest = 0;
+    var totalPaid = 0;
+    var months = 0;
+    var maxMonths = 1200;
+    var rows = [];
+
+    while (remaining > 0.5 && months < maxMonths) {
+      var interest = remaining * monthlyRate;
+      var payment = Math.min(monthly, remaining + interest);
+      var principal = payment - interest;
+      if (principal <= 0) {
+        return { stuck: true, months: months, totalInterest: totalInterest, totalPaid: totalPaid };
+      }
+      remaining -= principal;
+      totalInterest += interest;
+      totalPaid += payment;
+      months++;
+      if (months <= 3 || remaining <= 0.5) {
+        rows.push({ month: months, payment: payment, interest: interest, remaining: Math.max(0, remaining) });
+      }
+    }
+
+    return { stuck: months >= maxMonths, months: months, totalInterest: totalInterest, totalPaid: totalPaid, rows: rows };
+  }
+
+  function render() {
+    var balance = Math.max(0, Number(balanceInput.value) || 0);
+    var monthly = Math.max(0, Number(monthlyInput.value) || 0);
+    var rate = Math.max(0, Number(rateInput.value) || 0);
+
+    if (balance <= 0 || monthly <= 0) {
+      dangerArea.innerHTML = '';
+      summaryCards.innerHTML = '';
+      resultBody.innerHTML = '';
+      return;
+    }
+
+    var monthlyInterestOnStart = balance * (rate / 100 / 12);
+
+    if (monthly <= monthlyInterestOnStart) {
+      dangerArea.innerHTML = '<div class="danger-box">⚠️ この毎月の返済額だと、利息を払うだけで元金がほとんど減らず、いつまでも完済できません（初月の利息だけで約' + yen(monthlyInterestOnStart) + '発生しています）。毎月の返済額を増やすことを検討してください。</div>';
+      summaryCards.innerHTML = '';
+      resultBody.innerHTML = '';
+      return;
+    }
+    dangerArea.innerHTML = '';
+
+    var result = simulate(balance, monthly, rate);
+
+    var years = Math.floor(result.months / 12);
+    var remMonths = result.months % 12;
+    var periodText = (years > 0 ? years + '年' : '') + remMonths + 'ヶ月';
+
+    summaryCards.innerHTML =
+      '<div class="summary-card"><div class="label">完済までの期間</div><div class="value">' + periodText + '</div><div class="sub">支払い回数 ' + result.months + '回</div></div>' +
+      '<div class="summary-card warn"><div class="label">支払う利息の総額</div><div class="value">' + yen(result.totalInterest) + '</div><div class="sub">一括で払えていれば0円だった金額</div></div>' +
+      '<div class="summary-card"><div class="label">支払総額</div><div class="value">' + yen(result.totalPaid) + '</div><div class="sub">元金 ' + yen(balance) + ' + 利息 ' + yen(result.totalInterest) + '</div></div>';
+
+    resultBody.innerHTML = result.rows.map(function (r, i) {
+      var isLast = i === result.rows.length - 1;
+      var label = isLast ? '完済（' + r.month + '回目）' : r.month + '回目';
+      return '<tr><td>' + label + '</td><td class="num">' + yen(r.payment) + '</td><td class="num">' + yen(r.interest) + '</td><td class="num">残高 ' + yen(r.remaining) + '</td></tr>';
+    }).join('');
+  }
+
+  [balanceInput, monthlyInput, rateInput].forEach(function (el) {
+    el.addEventListener('input', render);
+  });
+
+  render();
+
+  var WEB3FORMS_ACCESS_KEY = '4551c9fd-4327-4bd4-97e0-8b93d85fd077';
+  var contactForm = document.getElementById('contactForm');
+  var contactStatus = document.getElementById('contactStatus');
+  var contactSubmit = document.getElementById('contactSubmit');
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    contactSubmit.disabled = true;
+    contactStatus.textContent = '送信中...';
+    contactStatus.className = 'contact-status';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: 'リボ払い利息計算ツールへのお問い合わせ',
+        email: document.getElementById('contactEmail').value || 'noreply@example.com',
+        message: document.getElementById('contactMessage').value
+      })
+    }).then(function (res) { return res.json(); }).then(function (data) {
+      contactSubmit.disabled = false;
+      if (data.success) {
+        contactStatus.textContent = '送信しました。ありがとうございます！';
+        contactStatus.className = 'contact-status ok';
+        contactForm.reset();
+      } else {
+        contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+        contactStatus.className = 'contact-status err';
+      }
+    }).catch(function () {
+      contactSubmit.disabled = false;
+      contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+      contactStatus.className = 'contact-status err';
+    });
+  });
+})();
+</script>
+</body>
+</html>
