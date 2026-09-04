@@ -39,6 +39,29 @@
   "inLanguage": "ja"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "リボ払いはなぜ利息が高くなりやすいのですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "リボ払いは毎月の返済額が一定になるように設計されているため、残高が減るペースが遅く、その分利息が発生する期間が長くなります。実質年率が15%前後に設定されていることが多く、完済までの総支払額が想定より大きく膨らみやすい仕組みです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "毎月の返済額を増やすと利息はどれくらい減りますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "毎月の返済額を増やすほど元本の減るペースが速くなり、利息が発生する期間が短くなるため、支払う利息の総額は大きく減ります。同じ残高でも、返済額を1.5倍にするだけで完済までの期間と利息総額がどれだけ変わるか、このツールで具体的にシミュレーションできます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "一括払いとリボ払いではどれくらい差が出ますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "一括払いであれば利息はかかりませんが、リボ払いにすると残高・返済額・実質年率に応じて数千円〜数万円単位の利息が発生することもあります。このツールでは一括で払った場合との差額もあわせて表示するため、リボ払いを続けることの実質的なコストが把握しやすくなっています。" }
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --bg: #ffffff;
@@ -161,6 +184,19 @@ footer.site-footer {
 }
 footer.site-footer p { margin: 0 0 0.5rem; }
 footer.site-footer a { color: var(--accent); }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  cursor: pointer; font-weight: 700; font-size: 0.92rem; list-style: none;
+  position: relative; padding-right: 1.6rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; position: absolute; right: 0; top: 0; color: var(--accent); font-weight: 700; font-size: 1.1rem;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.88rem; }
 </style>
 </head>
 <body>
@@ -239,6 +275,22 @@ footer.site-footer a { color: var(--accent); }
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
+
+  <section>
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>リボ払いはなぜ利息が高くなりやすいのですか？</summary>
+      <p>リボ払いは毎月の返済額が一定になるように設計されているため、残高が減るペースが遅く、その分利息が発生する期間が長くなります。実質年率が15%前後に設定されていることが多く、完済までの総支払額が想定より大きく膨らみやすい仕組みです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>毎月の返済額を増やすと利息はどれくらい減りますか？</summary>
+      <p>毎月の返済額を増やすほど元本の減るペースが速くなり、利息が発生する期間が短くなるため、支払う利息の総額は大きく減ります。同じ残高でも、返済額を1.5倍にするだけで完済までの期間と利息総額がどれだけ変わるか、このツールで具体的にシミュレーションできます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>一括払いとリボ払いではどれくらい差が出ますか？</summary>
+      <p>一括払いであれば利息はかかりませんが、リボ払いにすると残高・返済額・実質年率に応じて数千円〜数万円単位の利息が発生することもあります。このツールでは一括で払った場合との差額もあわせて表示するため、リボ払いを続けることの実質的なコストが把握しやすくなっています。</p>
+    </details>
+  </section>
 
   <section class="contact-box">
     <h2>ご意見・追加してほしい機能</h2>
