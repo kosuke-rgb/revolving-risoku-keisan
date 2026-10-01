@@ -87,6 +87,16 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://webtools-labs.com/" },
+    { "@type": "ListItem", "position": 2, "name": "リボ払い・分割払い 実質利息計算ツール" }
+  ]
+}
+</script>
 <style>
 :root {
   --bg: #ffffff;
@@ -222,10 +232,14 @@ footer.site-footer a { color: var(--accent); }
 }
 .faq-item[open] summary::after { content: '−'; }
 .faq-item p { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.88rem; }
+.breadcrumb { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.1rem; }
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 <div class="page">
+  <nav class="breadcrumb" aria-label="パンくずリスト"><a href="https://webtools-labs.com/">ホーム</a> / リボ払い・分割払い 実質利息計算ツール</nav>
   <header class="masthead">
     <h1>リボ払い・分割払い 実質利息計算ツール</h1>
     <p class="lede">残高・毎月の返済額・実質年率を入れるだけで、完済までにかかる期間と、支払うことになる利息の総額をまとめて計算します。</p>
